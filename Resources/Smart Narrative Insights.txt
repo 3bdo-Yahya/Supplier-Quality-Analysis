@@ -1,0 +1,128 @@
+Smart Narrative: Insights
+
+1. Executive Summary Page﻿
+
+Q4 had the highest total Total Defect Qty at 15145638, followed by Q2, Q3, and Q1.﻿﻿
+﻿﻿Total Defect Qty and total MaxQty are negatively correlated with each other.﻿﻿
+﻿﻿2014 in Quarter Q4 made up 17.84% of Total Defect Qty.﻿﻿
+﻿﻿Q4 had the highest average Total Defect Qty at 7572819, followed by Q2, Q3, and Q1.﻿﻿
+
+﻿﻿At 6629657, Detriot, MI had the highest Total Defect Qty and was 6,198.78% higher than Davenport, IA, which had the lowest Total Defect Qty at 105253.﻿﻿
+
+= category
+/// by total defect quantity
+﻿﻿Mechanicals accounted for 31.14% of Total Defect Qty.﻿﻿
+﻿﻿Across all 6 Category, Total Defect Qty ranged from 1650080 to 16989072.﻿﻿
+/// by total down time min
+﻿﻿Logistics accounted for 40.41% of Total Downtime Min.﻿﻿
+﻿﻿Across all 6 Category, Total Downtime Min ranged from 1958 to 55909.﻿﻿
+
+= vendor 
+/// by total down time min
+﻿﻿﻿Reddoit accounted for 18.93% of Total Downtime Min.﻿﻿﻿
+﻿﻿Across all 318 Vendor.1, Total Downtime Min ranged from 0 to 26185.﻿﻿
+/// by total defect quantity
+﻿Solholdings accounted for 7.29% of Total Defect Qty.
+﻿Across all 318 Vendor.1, Total Defect Qty ranged from 0 to 3977962.
+
+= defect
+/// by total defect quantity
+Misc accounted for 8.40% of Total Defect Qty.
+Across all 268 Defect.1, Total Defect Qty ranged from 0 to 4583814.
+/// by total down time min
+Bad Seams accounted for 11.77% of Total Downtime Min.
+Across all 268 Defect.1, Total Downtime Min ranged from 0 to 16278.
+
+= Plant
+/// by total down time min
+Springfield, IL accounted for 12.50% of Total Downtime Min.
+Across all 24 Plant, Total Downtime Min ranged from 0 to 17296.
+/// by total defect quantity
+Detriot, MI accounted for 12.15% of Total Defect Qty.
+Across all 24 Plant, Total Defect Qty ranged from 105253 to 6629657
+
+= defect type
+/// by total defect quantity
+Rejected accounted for 35.54% of Total Defect Qty.
+﻿﻿No Impact had 15868305 Total Defect Qty, Impact had 19301562, and Rejected had 19388929.﻿﻿
+/// by total down time min
+impact accounted for 75.71% of Total Downtime Min.
+No Impact had 5139 Total Downtime Min, Impact had 104737, and Rejected had 28465.
+
+
+
+2. Supplier page:
+
+﻿Impact had the highest total Total Defect Qty at 10672315, followed by Rejected at 8657484 and No Impact at 5751238.﻿﻿
+﻿﻿
+﻿﻿Plustax in Defect Type Impact made up 13.03% of Total Defect Qty.﻿﻿
+﻿﻿
+﻿﻿Impact had the highest average Total Defect Qty at 1,067,231.50, followed by Rejected at 865,748.40 and No Impact at 575,123.80.﻿﻿
+﻿﻿
+﻿﻿Rejected had the highest Total Defect Qty at 19388929, followed by Impact at 19301562 and No Impact at 15868305.﻿﻿
+﻿﻿
+﻿﻿Rejected accounted for 35.54% of Total Defect Qty.﻿﻿
+
+﻿Impact had the highest total Total Downtime Min at 27927, followed by Rejected at 8885 and No Impact at 1975.﻿﻿
+﻿﻿
+﻿﻿Plustax in Defect Type Impact made up 25.51% of Total Downtime Min.﻿﻿
+﻿﻿
+﻿﻿Impact had the highest average Total Downtime Min at 2,792.70, followed by Rejected at 888.50 and No Impact at 197.50.﻿﻿
+﻿﻿
+﻿﻿Impact had the highest Total Downtime Min at 104737, followed by Rejected at 28465 and No Impact at 5139.﻿﻿
+﻿﻿
+﻿﻿Impact accounted for 75.71% of Total Downtime Min.﻿﻿
+
+
+
+3. Plant Page:
+
+﻿﻿Logistics accounted for 40.41% of Total Downtime Min.﻿﻿
+﻿﻿
+﻿﻿Springfield, IL had the highest Total Downtime Min (17296) and Detriot, MI had the highest Total Defect Qty (6629657). The Category with the highest Total Downtime Min was Logistics and the Category with the highest Total Defect Qty was Packaging.﻿﻿
+﻿﻿
+﻿﻿Most Plant were below 5764 in Total Downtime Min and below 2273283 in Total Defect Qty.﻿﻿
+﻿﻿
+﻿﻿At 17296, Springfield, IL had the highest Total Downtime Min and was Infinity higher than Appleton, WI, which had the lowest Total Downtime Min at 0.﻿﻿
+﻿﻿
+﻿﻿Across all 24 Plant, Total Downtime Min ranged from 0 to 17296.﻿﻿
+
+﻿﻿Mechanicals accounted for 31.14% of Total Defect Qty.﻿﻿
+﻿﻿
+﻿﻿﻿﻿At 6629657, Detriot, MI had the highest Total Defect Qty and was 6,198.78% higher than Davenport, IA, which had the lowest Total Defect Qty at 105253.﻿﻿
+﻿﻿
+﻿﻿Across all 24 Plant, Total Defect Qty ranged from 105253 to 6629657.﻿﻿
+
+
+
+4. Material Page:
+
+﻿﻿﻿Total Total Downtime Min was highest for Corrugate at 52726, followed by Raw Materials, and Carton.﻿﻿
+﻿﻿
+﻿﻿Oct in Material Type Raw Materials made up 4.41% of Total Downtime Min.﻿﻿
+
+﻿﻿Oct in Material Type Raw Materials made up 5.90% of Total Defect Qty.﻿﻿
+﻿﻿
+﻿﻿Average Total Downtime Min was highest for Corrugate at 4,393.83, followed by Raw Materials and Carton.﻿﻿
+
+﻿﻿At 13218621, Raw Materials had the highest Total Defect Qty and was Infinity higher than Wires, which had the lowest Total Defect Qty at 0.﻿﻿
+﻿﻿
+﻿﻿Raw Materials accounted for 24.23% of Total Defect Qty.﻿﻿
+﻿﻿
+﻿﻿Across all 22 Material Type, Total Defect Qty ranged from 0 to 13218621.﻿﻿
+
+- Material ID:
+﻿﻿Total Downtime Min was highest for 1142 at 2958, followed by 456 and 935.﻿﻿
+﻿﻿1142 accounted for 2.14% of Total Downtime Min.﻿﻿
+﻿﻿Across all 2,071 Material ID, Total Downtime Min ranged from 0 to 2958.﻿﻿
+﻿﻿
+﻿- Material type:
+﻿﻿Total Downtime Min was highest for Corrugate at 52726, followed by Raw Materials and Carton.﻿﻿
+﻿﻿Corrugate accounted for 38.11% of Total Downtime Min.﻿﻿
+﻿﻿Across all 22 Material Type, Total Downtime Min ranged from 0 to 52726.﻿﻿
+﻿﻿
+﻿
+
+
+﻿﻿
+﻿

@@ -1,0 +1,222 @@
+Draft: Supplier Quality Analysis
+
+=================About Dataset=================
+
+Supplier quality analysis is a critical aspect of supply chain management. It focuses on evaluating and monitoring suppliers' performance to ensure consistent product quality and timely deliveries. Effective supplier analysis helps businesses reduce defects, enhance operational efficiency, and improve customer satisfaction. By leveraging data analytics and visualization tools like Power BI, companies can gain actionable insights into supplier performance, detect patterns, and implement improvements. 
+
+Description Page: This industry sample dataset focuses on one of the typical supply chain challenges: supplier quality analysis. Two primary metrics are at play in this analysis: total number of defects and the total downtime that these defects caused.
+
+The dataset for this analysis comprises:
+
+- Category: The category or classification of the material or product.
+	the table contains columns => Sub Category, Sub Category ID, Category.
+	the category column has the same 6 categories as the sub category column. (6 rows)
+
+- Defect: A brief description for the type of defect.
+	the table contains columns => Defect, Defect ID
+	the Defect column has 272 distinct, 245 unique and 305 rows
+
+- Defect Report: 6145 rows and 10 columns; (7 IDs columns + Date + Defect Qty + Downtime min):
+	Defect Qty: The total quantity of defective materials recorded. (values range [0, 487008])
+	Downtime min: The total number of minutes of downtime caused by the defective material. (values range [0, 999])
+	7 IDs columns: Material ID: That column has nothing related with in this table or any other dimension table and the other 6 ID columns.
+
+- Defect Type: The classification of the defect observed in the material.
+	the table contains columns => Defect Type, Defect Type ID, Sort
+	Defect Type: No Impact, Impact, Rejected (3 rows)
+
+ - Material Type: The specific type or kind of material being used.
+	the table contains columns => Material Type, Material Type ID
+	Material Type: 22 rows with distinct and unique values
+
+ - Plant: The geographic location or site of the plant where the material was used.
+	the table contains columns => Plant, Plant ID
+	the Plant column has 24 rows with distinct and unique values
+
+ - Vendor: The name or identifier of the supplier providing the material.
+	the table contains columns => Vendor, Vendor ID
+	the Vendor column has 326 distinct, 324 unique and 328 rows
+
+=================Business Questions to Answer=================
+
+Material Performance
+✅ What are the most common defects across all materials?
+📌 Are there correlations between high downtime and specific suppliers or materials?
+📌 Which materials contribute the most to defects and downtime?
+📌 Do defect rates vary significantly across different material types?
+
+Supplier Performance Analysis
+📌 Which supplier has the highest defect rate, and how does it compare to the lowest-performing supplier?
+✅ What is the defect trend per supplier over time?
+📌 Which suppliers contribute the most to downtime due to defects, and what is their financial impact?
+✅ How do suppliers compare based on total defect quantity?
+📌 Are certain suppliers consistently underperforming across different materials and plants?
+
+Plant Performance
+📌 Which plants experience the highest defect rates, and how does that impact production?
+✅ Which plants experience the most downtime due to defects?
+✅ Are certain categories of materials more prone to defects?
+✅ How do defects vary by plant location?
+📌 Are specific plants struggling more with defect rates than others?
+
+
+1️⃣ Defect Analysis
+✅ Which defects and materials drive the highest failure rates?
+✅ Which material categories are most prone to defects?
+
+2️⃣ Supplier Performance
+✅ Which suppliers have the highest defect rates and downtime impact?
+✅ How do suppliers rank in defect trends over time?
+✅ Are certain suppliers consistently underperforming across materials and plants?
+
+3️⃣ Plant Efficiency
+✅ Which plants struggle with the highest defect rates and downtime?
+✅ Are defect rates higher at specific plant locations?
+
+4️⃣ Operational Impact
+✅ What is the financial cost of supplier defects and downtime?
+✅ Is there a link between high downtime and specific suppliers or materials?
+
+
+=================Cleaning and Preprocessing=================
+
+- Export the Google Sheet as .xlsx and import via Power BI’s Excel File connector.
+  file - download - Microsoft excel (.xlsx)
+  Select all tables, then transform data
+
+- first, on the fact table defect report, I clicked keep duplicates to show if there duplicate records exist, and yup, good guess, i found 326 rows kept which are duplicate rows and have the same values across all columns, they are pure duplicates and can be removed. so I undone the kept duplicates step then removed duplicates from the fact table.
+
+- Sub Category is just a duplicate of Category (1-to-1 match), so I removed Sub Categoy column, then renamed Sub Category ID to Category ID in both fact and dim tables.
+
+- removed duplicates for columns: Defect and Vendor, then Checked if Defect ID and Vendor ID Match in Defect Report => had 32 missing Defect IDs and 2 missing Vendor IDs in Defect Report. This is a classic referential integrity issue. When I removed duplicates in Defect and Vendor tables, their corresponding Defect ID and Vendor ID were also removed. However, those IDs still exist in the fact table (Defect Report). This created a referential integrity issue—meaning some records in the fact table are now orphaned (pointing to missing IDs in their dimension tables).
+
+Issue Summary:
+You found true duplicates in dDefect (Defect column) and dVendor (Vendor column).
+However, each duplicate Defect or Vendor name has multiple distinct IDs (e.g., "Vendor A" might have IDs 2, 4, and 81).
+If you remove duplicates from dDefect or dVendor, you also remove their corresponding IDs.
+Since fDefect Report (fact table) uses those IDs, removing them creates NULL values in fDefect Report, breaking referential integrity.
+
+= Detailed Solution:
+
+1. Merge Defect ID in the fact table (fDefect Report) with Defect ID in the dimension table (dDefect).
+2. Expand only the Defect column in the fact table.
+3. Duplicate the fact table and rename it to "New Dim Defect".
+4. Keep only the Defect and Defect ID columns in "New Dim Defect".
+5. Remove duplicates from the Defect column.
+Now, every duplicate defect gets assigned an only one already existing Defect ID.
+6. rename the Defect ID column in New Dim Defect table to New Defect ID.
+7. Merge Defect in the fact table with Defect in the "New Dim Defect" table.
+8. Expand only the New Defect ID column.
+9. Remove the old Defect ID column.
+
+in the fact table and all dim tables I changed every ID column data type from whole number into text, except for old Vendor ID and old Defect ID in them old Dim tables.
+
+finally, renamed all columns as follows:
+Dim Category
+Dim Defect
+Dim Defect Type
+Dim Material Type
+Dim Plant
+Dim Vendor
+Fact Defect Report
+New Dim Defect
+New Dim Vendor
+
+=================Modeling =================
+
+Creating a DAX Date Table: in the model view I created a new table named: "Dim Calendar = CALENDARAUTO()". also columns for Year, Month, Month #, Quarter, Quarter #, Day and Day #. then from table tools I marked the Date column as date table. then I sorted every column X with its X # column. Since Power BI removes auto-hierarchy, you need to manually create a date hierarchy using calculated columns then I manually created a date hierarchy; In Model View, right-click Year → Create Hierarchy Drag Quarter, Month, and Day under Year.
+
+Star Schema Data Model: With both my Dimension and Fact Tables in place, the next step was data modeling. I established relationships between tables by connecting the primary keys in the dimension tables to the foreign keys in the Fact Table. This resulted in a clean Star Schema Model. By organizing the data this way, you can be rest assured of generating reports without performance lags.
+
+hide unnecessary tables and columns (like old Dim Defect, Dim Vendor and column IDs)
+
+=================DAX Formulas=================
+
+A. Executive Summary Page:
+= Card 1:
+- Total Defect Qty = SUM('Fact Defect Report'[Defect Qty])
+And for story telling:
+- Previous Year Defect Qty = 
+CALCULATE(
+    SUM('Fact Defect Report'[Defect Qty]), 
+    SAMEPERIODLASTYEAR('Dim Calendar'[Date])
+)
+- Defect YoY Change % = 
+VAR CurrentYearDefects = SUM('Fact Defect Report'[Defect Qty])
+VAR PreviousYearDefects = 
+    CALCULATE(
+        SUM('Fact Defect Report'[Defect Qty]), 
+        SAMEPERIODLASTYEAR('Dim Calendar'[Date])
+    )
+RETURN 
+IF(
+    ISBLANK(PreviousYearDefects), 
+    BLANK(), 
+    DIVIDE(CurrentYearDefects - PreviousYearDefects, PreviousYearDefects) * 100
+)
+- Defect Status = 
+VAR Change = 
+    DIVIDE(
+        SUM('Fact Defect Report'[Defect Qty]) - 
+        CALCULATE(SUM('Fact Defect Report'[Defect Qty]), SAMEPERIODLASTYEAR('Dim Calendar'[Date])), 
+        CALCULATE(SUM('Fact Defect Report'[Defect Qty]), SAMEPERIODLASTYEAR('Dim Calendar'[Date]))
+    )
+RETURN 
+SWITCH(
+    TRUE(),
+    ISBLANK(Change), "No Data",
+    Change > 0, "🔴 Increase",
+    Change < 0, "🟢 Decrease",
+    "🟡 No Change"
+)
+
+= Card 2: as same as Card 1 but for Defect Qty
+
+= Card 3: Total Loss (Min):
+- New Parameter (numeric range);
+Loss = GENERATESERIES(CURRENCY(0.5), CURRENCY(25), CURRENCY(0.5))
+- Loss Value = SELECTEDVALUE('Loss'[Loss], 1)
+- Total Loss = [Total Downtime Min] * Loss[Loss Value]
+And for storytelling:
+- Total Loss YoY Change % = 
+DIVIDE(
+        [Total Hourly Loss]-[Prev Year Loss],
+        [Prev Year Loss]
+)
+- Loss Status = 
+VAR TotalHourlyLoss = [Total Downtime Min] * [Hourly Loss]
+VAR PrevYearLoss = CALCULATE([Total Hourly Loss], SAMEPERIODLASTYEAR('Dim Calendar'[Date]))
+VAR Change = 
+DIVIDE(
+        [Total Hourly Loss]-[Prev Year Loss],
+        [Prev Year Loss]
+)
+RETURN 
+SWITCH(
+    TRUE(),
+    ISBLANK(Change), "No Data",
+    Change > 0, "🔴 Increase",
+    Change < 0, "🟢 Decrease",
+    "🟡 No Change"
+)
+
+B. Supplier Performance Page (as same DAXs for the page: C. Plant Performance)
+- Avg Defect Qty Per Vendor = 
+DIVIDE(
+    SUM('Fact Defect Report'[Defect Qty]), 
+    DISTINCTCOUNT('Dim Vendor'[Vendor ID])
+)
+- Avg Downtime Per Vendor = 
+DIVIDE(
+    SUM('Fact Defect Report'[Downtime min]), 
+    DISTINCTCOUNT('Dim Vendor'[Vendor ID])
+)
+- Top Vendor = 
+TOPN(1, VALUES('New Dim Vendor'[Vendor.1]), 
+    CALCULATE(SUM('Fact Defect Report'[Defect Qty])), DESC)
+
+- Top Vendor by DTime = 
+TOPN(1, VALUES('New Dim Vendor'[Vendor.1]), 
+    CALCULATE(SUM('Fact Defect Report'[Downtime min])), DESC)
+
+- Total Vendors = DISTINCTCOUNT('Dim Vendor'[Vendor ID])
