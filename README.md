@@ -3,17 +3,19 @@
 **🏆 First Place Winner – EYouth x DEPI Data Challenge**
 *A Power BI project analyzing supplier performance, defect patterns, and production impact through visual storytelling and advanced analytics.*
 
+![App Screenshot](https://drive.google.com/uc?id=1BK3uBYP_KBlk5YKcqUaKo1yzQGGhKfCw)
+
 ---
 
 ## 📌 Overview
 
-This project presents a comprehensive **Supplier Quality Analysis** leveraging Power BI to explore the root causes and operational impact of defective materials within a supply chain. With over **55 million defected units** and **138,000 minutes of downtime**, this analysis uncovers critical insights into **vendor performance**, **plant bottlenecks**, and **financial loss** due to poor quality.
+This project presents a comprehensive **Supplier Quality Analysis** leveraging Power BI to explore the root causes and operational impact of defective materials within a supply chain. With over **55 million defective units** and **138,000 minutes of downtime**, this analysis uncovers critical insights into **vendor performance**, **plant bottlenecks**, and **financial loss** due to poor quality.
 
 ---
 
 ## 🔍 Key Business Questions
 
-* What are the most frequent defect types and which materials are most prone to failures?
+* What are the most frequent defect types, and which materials are most prone to failures?
 * Which vendors contribute the most to defects and downtime?
 * Are certain plants struggling more with defect rates or delays?
 * What is the financial cost of these defects on operations?
